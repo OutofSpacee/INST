@@ -1,4 +1,5 @@
 import os
+import matplotlib.pyplot as plt
 
 def list_files_in_directory(directory_path):
     """
@@ -60,16 +61,32 @@ def print_and_save_results(results, word):
             print(output)
             output_file.write(output + '\n')
 
+def plot_results(results, word):
+    """
+    Plots the word count results using Matplotlib.
+    """
+    file_names = [os.path.basename(file_path) for file_path, count in results]
+    counts = [count for file_path, count in results]
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(file_names, counts, color='skyblue')
+    plt.xlabel('File Name')
+    plt.ylabel('Word Count')
+    plt.title(f"Word Count of '{word}' in Each File")
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig('word_count_plot.png')
+    plt.show()
 
 
 attempts = 0
     
-    # Display welcome message
+
 print("----------------------------")
 print("Welcome to Word Counter Final!")
 print("----------------------------")
     
-# Display current working directory
+# List current working directory
 cwd = os.getcwd()
 print("\n----------------------------")
 print("Current working directory:", cwd)
@@ -126,10 +143,10 @@ print_and_save_results(results, word)
 print("----------------------------\n")
     
 print("\n----------------------------")
-print("Results have been saved to 'word_count_results.txt'.")
+print("Results have been saved to 'word_count_results.txt' and have been plotted on a graph!.")
 print("----------------------------\n")
 
-
+plot_results(results, word)
 
 # Test Case 1: Make sure to run full code above then put in the following answers to the following questions:
 
@@ -143,6 +160,7 @@ print("----------------------------\n")
     #The word 'the' was found 26 times in the file! File: C:\Users\rosea\INST 126\word_count_program\word_count_program\monty_python_sketches\cheeseshop_sketch.txt
     #The word 'the' was found 54 times in the file! File: C:\Users\rosea\INST 126\word_count_program\word_count_program\monty_python_sketches\pet_shoppe.txt
     #The word 'the' was found 10 times in the file! File: C:\Users\rosea\INST 126\word_count_program\word_count_program\monty_python_sketches\spam_song.txt
+    #A graph should apear showing the results
 
 #Test Case 2: Make sure to run full code above then put in the following answers to the following questions:
 
@@ -156,3 +174,4 @@ print("----------------------------\n")
     #The word 'Cheese' was found 4 times in the file! File: C:\Users\rosea\INST 126\word_count_program\word_count_program\monty_python_sketches\cheeseshop_sketch.txt
     #The word 'Cheese' was found 0 times in the file! File: C:\Users\rosea\INST 126\word_count_program\word_count_program\monty_python_sketches\pet_shoppe.txt
     #The word 'Cheese' was found 0 times in the file! File: C:\Users\rosea\INST 126\word_count_program\word_count_program\monty_python_sketches\spam_song.txt
+    #A graph should apear showing the results
